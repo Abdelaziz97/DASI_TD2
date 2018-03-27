@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html>
+    <head>
+        <title>Liste des Personnes</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    <body>
+        <h1>Liste des Personnes</h1>
+        <ul id="liste-personnes">
+            <li>Abdelaziz EL OMARI ALAOUI (abdelaziz.el-omari-alaoui@insa-lyon.fr)</li>
+            <li>Lucie GALLE (lucie.galle@insa-lyon.fr)</li>
+        </ul>
+        <a href="index.html">Retour a l'Accueil</a>
+        <script>
+            function ajouter(personne) {
+                // fonction à compléter
+                listePersonnesHtml.append('<li>'+ personne.civilite +" "+ 
+                        personne.prenom +" "+personne.nom+"</li>");
+            }
+            $(document).ready(function () {
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        action: 'ConsulterListePersonnes'
+                    },
+                    dataType: 'json'
+                }).done(function (data) {
+                    $('#liste-personnes').empty();
+                    var listePersonnesHtml = $('#liste-personnes');
+                    var personnes = data.personnes;
+                    listePersonnesHtml.append('<ul id="liste-personnes-demandées">');
+                    for (var i = 0; i < personnes.length; i++) {
+                        ajouter(data.personnes[i]);
+                    }
+                    listePersonnesHtml.append('</ul>');
+                });
+            });
+        </script>
+    </body>
+</html>
