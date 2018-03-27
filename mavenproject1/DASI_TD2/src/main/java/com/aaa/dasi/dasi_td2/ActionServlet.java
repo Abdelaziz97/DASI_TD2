@@ -53,7 +53,7 @@ public class ActionServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         switch(action){
-            case "listPeople" :
+            case "ConsulterListePersonnes" :
                 
                 Service s = new Service();
                 List<Personne> lp = null;

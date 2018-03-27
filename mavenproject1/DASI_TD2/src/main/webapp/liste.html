@@ -26,6 +26,7 @@ and open the template in the editor.
                         personne.prenom +" "+personne.nom+"</li>");
             }
             $(document).ready(function () {
+                console.log("last hope");
                 $.ajax({
                     url: './ActionServlet',
                     method: 'POST',
@@ -38,6 +39,7 @@ and open the template in the editor.
                     var listePersonnesHtml = $('#liste-personnes');
                     var personnes = data.personnes;
                     listePersonnesHtml.append('<ul id="liste-personnes-demandées">');
+                    
                     for (var i = 0; i < personnes.length; i++) {
                         ajouter(data.personnes[i]);
                     }
